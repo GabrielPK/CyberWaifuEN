@@ -167,11 +167,11 @@ class Ui_MainWindow(QMainWindow, Ui_MainWindow):
 
     def do(self):  # 请求
         ipt = self.textEdit.toPlainText()
-        def show_text():
-            if settings['show-both-zh-jp'] is True:
-                self.label.setText(opt['zh'] + '\n\n' + opt['jp'])
-            else:
-                self.label.setText(opt['zh'])
+        # def show_text():
+        #     if settings['show-both-zh-jp'] is True:
+        #         self.label.setText(opt['zh'] + '\n\n' + opt['jp'])
+        #     else:
+        #         self.label.setText(opt['zh'])
 
         status = ':: Now waiting GPT...'
         print(status)
@@ -181,28 +181,29 @@ class Ui_MainWindow(QMainWindow, Ui_MainWindow):
             o_dic = util.get_gpt_json(ipt)  # GPT
         except Exception as e:
             print(e.args)
-        opt['zh'] = util.base64_decode(o_dic['zh'])
-        if 'jp' in o_dic:
-            opt['jp'] = util.base64_decode(o_dic['jp'])
-        elif 'jpn' in o_dic:
-            opt['jp'] = util.base64_decode(o_dic['jpn'])
+        opt['en'] = util.base64_decode(o_dic['raw'])
+        # opt['zh'] = util.base64_decode(o_dic['zh'])
+        # if 'jp' in o_dic:
+        #     opt['jp'] = util.base64_decode(o_dic['jp'])
+        # elif 'jpn' in o_dic:
+        #     opt['jp'] = util.base64_decode(o_dic['jpn'])
 
-        if settings['text-voice-sync'] is not True:
-            show_text()  # 显示中文文本
+        # if settings['text-voice-sync'] is not True:
+        #     show_text()  # 显示中文文本
 
         status = ':: Now waiting TTS...'
         print(status)
         self.setWindowTitle("CyberWaifu {}".format(status))
         try:
-            self.current_wav_path = util.get_tts_wav(opt['jp'])  # TTS, 语音 日语
+            self.current_wav_path = util.get_tts_wav(opt['en'])  # TTS, 语音 日语
         except Exception as e:
             print(e.args)
         print(self.current_wav_path)
 
         print(':: Done')
         self.setWindowTitle("CyberWaifu")
-        if settings['text-voice-sync'] is True:
-            show_text()  # 显示中文文本
+        # if settings['text-voice-sync'] is True:
+        #     show_text()  # 显示中文文本
         try:
             util.playsound(self.current_wav_path)  # 播放语音
         except Exception as e:

@@ -7,13 +7,13 @@
     "length": 12,
     "translator": "google",
     "google-trans": {
-        "trans-ipt": "zh",
-        "trans-opt": "zh",
-        "trans-opt2": "jpn"
+        "trans-ipt": null,
+        "trans-opt": null,
+        "trans-opt2": null
     },
     "baidu-trans": {
-        "trans-ipt": "zh",
-        "trans-opt": "zh",
-        "trans-opt2": "jp"
+        "trans-ipt": null,
+        "trans-opt": null,
+        "trans-opt2": null
     }
 }

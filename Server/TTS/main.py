@@ -7,7 +7,7 @@ from matplotlib.figure import Figure
 from matplotlib.colors import LinearSegmentedColormap
 from scipy.io.wavfile import write
 
-import g2p.jp.japanese_g2p as jp_g2p
+# import g2p.jp.japanese_g2p as jp_g2p
 import g2p.zh.chinese_g2p as zh_g2p
 
 import numpy as np
@@ -137,8 +137,10 @@ def main():
 
     @app.route("/<prompt>")
     def receive_request(prompt):
-        print(":: Getting romaji...")
-        txt = jp_g2p.get_romaji_with_space(prompt)
+        # print(":: Getting romaji...")
+        # txt = jp_g2p.get_romaji_with_space(prompt)
+        print(':: Getting text...')
+        txt = prompt
         print(":: Generating...")
         wav_path = taco.inference_taco(txt)
         url_for('static', filename=wav_path)
